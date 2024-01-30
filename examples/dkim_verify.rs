@@ -48,6 +48,10 @@ async fn main() {
     // Validate signature
     let result = resolver.verify_dkim(&authenticated_message).await;
 
+    for r in result.iter() {
+        println!("result {:?}", r);
+    }
+
     // Make sure all signatures passed verification
     assert!(result.iter().all(|s| s.result() == &DkimResult::Pass));
 }
